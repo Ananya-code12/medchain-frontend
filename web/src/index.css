@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body { @apply bg-paper text-ink font-sans text-base; }
+  /* Always-visible keyboard focus */
+  :focus-visible { outline: 3px solid #1F5FBF; outline-offset: 2px; }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+}
+@layer components {
+  .btn { @apply inline-flex min-h-[48px] items-center justify-center rounded-lg px-5 font-bold; }
+  .btn-primary { @apply btn bg-brand text-white hover:bg-brand-dark; }
+  .btn-ghost { @apply btn border-2 border-brand text-brand hover:bg-brand-soft; }
+}
+
+/* Faint grid backdrop, like the reference design. Static. */
+body {
+  background-image: linear-gradient(#E6ECF4 1px, transparent 1px), linear-gradient(90deg, #E6ECF4 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+@layer components {
+  .card { @apply rounded-xl border border-line bg-panel p-4; }
+  .input { @apply min-h-[48px] w-full rounded-lg border-2 border-line bg-white px-3; }
+  .label { @apply mb-1 block font-bold; }
+  .pill { @apply inline-flex items-center rounded-full px-3 py-1 text-sm font-bold; }
+}
+
+/* Landing motion. All of it is switched off by the prefers-reduced-motion rule above. */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+.reveal.in { opacity: 1; transform: none; }
+.lift { transition: transform .2s ease, box-shadow .2s ease; }
+.lift:hover { transform: translateY(-4px); box-shadow: 0 10px 24px rgba(18, 38, 58, .12); }
+@keyframes fill { from { width: 0; } to { width: 100%; } }
+@keyframes rowIn { from { opacity: 0; transform: translateX(-14px); } to { opacity: 1; transform: none; } }
+@keyframes ping { from { box-shadow: 0 0 0 0 rgba(23, 97, 58, .55); } to { box-shadow: 0 0 0 12px rgba(23, 97, 58, 0); } }
+.bar-fill { animation: fill 3.6s ease-out forwards; }
+.row-in { opacity: 0; animation: rowIn .5s ease forwards; }
+.ping { animation: ping 1.6s ease-out infinite; }
